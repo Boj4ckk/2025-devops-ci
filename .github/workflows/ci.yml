@@ -29,12 +29,15 @@ jobs:
 
       - name: install dependencies
         run: pnpm install
+      
+      - name: install playwright
+        run: pnpm exec playwright install --with-deps
 
       - name: format check
         run: pnpm format
 
       - name: linter check
-        run: pnpm lint
+        run: pnpm lint:fix
 
       - name: run unit tests
         run: pnpm test
