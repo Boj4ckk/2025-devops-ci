@@ -40,22 +40,22 @@ jobs:
         run: pnpm install
 
       - name: format check
-        run: pnpm format:check
+        run: pnpm run format:check
 
       - name: linter check
-        run: pnpm lint
+        run: pnpm run  lint
 
       - name: run unit tests
-        run: pnpm test
+        run: pnpm run test
 
       - name: build test
-        run: pnpm  build
+        run: pnpm run build
 
       - name: documentation build check
-        run: pnpm build-storybook
+        run: pnpm run build-storybook
 
       - name: e2e tests
-        run: pnpm test:e2e
+        run: pnpm run test:e2e
       
 
 
