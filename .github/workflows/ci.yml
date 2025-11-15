@@ -1,0 +1,61 @@
+name: Unit Test
+
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: todo
+        ports:
+          - 5432:5432
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: install pnpm
+        run: npm install -g pnpm
+
+      - name: install dependencies
+        run: pnpm install
+
+      - name: format check
+        run: pnpm format:check
+
+      - name: linter check
+        run: pnpm lint
+
+      - name: run unit tests
+        run: pnpm test
+
+      - name: build test
+        run: pnpm  build
+
+      - name: documentation build check
+        run: pnpm build-storybook
+
+      - name: e2e tests
+        run: pnpm test:e2e
+      
+
+
